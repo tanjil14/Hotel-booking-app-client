@@ -5,8 +5,9 @@
 1.  create some routes
 2.  create home page
 3.  create components for home page
-4. create list page and adding search option and search items in hotels route
-        Components:
+4.  create list page and adding search option and search items in hotels route
+5.  create hotel page and adding slider using custom css
+    Components:
 
                 1. navbar
                 2. header
