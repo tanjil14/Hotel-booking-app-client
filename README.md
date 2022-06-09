@@ -12,4 +12,5 @@
                 2. header
                 3. featured
                 4. featured properties
-                5.Email list 
+                5. Email list
+                6. Footer
