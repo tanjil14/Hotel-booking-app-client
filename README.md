@@ -7,6 +7,7 @@
 3.  create components for home page
 4.  create list page and adding search option and search items in hotels route
 5.  create hotel page and adding slider using custom css
+6.  create custom hook useFetch
     Components:
 
                 1. navbar
