@@ -1,4 +1,4 @@
-import UseFetch from "../../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const images = [
@@ -9,7 +9,7 @@ const images = [
   "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
 ];
 const PropertyList = () => {
-  const { data, loading } = UseFetch(
+  const { data, loading } = useFetch(
     "http://localhost:8800/api/hotels/countByType"
   );
   return (
@@ -19,16 +19,14 @@ const PropertyList = () => {
       ) : (
         <>
           {data &&
-            images.map((img,i) => (
+            images.map((img, i) => (
               <div key={i} className="pListItem">
-                <img
-                  src={img}
-                  alt=""
-                  className="pListImg"
-                />
+                <img src={img} alt="" className="pListImg" />
                 <div className="pListTitles">
                   <h1>{data[i]?.type}</h1>
-                  <h2>{data[i]?.count} {data[i]?.type}</h2>
+                  <h2>
+                    {data[i]?.count} {data[i]?.type}
+                  </h2>
                 </div>
               </div>
             ))}

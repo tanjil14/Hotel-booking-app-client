@@ -1,8 +1,8 @@
-import UseFetch from "../../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
 
 const FeaturedProperties = () => {
-  const { data, loading } = UseFetch(
+  const { data, loading } = useFetch(
     "http://localhost:8800/api/hotels?features=true&limit=4"
   );
   return (
