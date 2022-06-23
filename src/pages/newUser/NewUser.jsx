@@ -2,17 +2,18 @@ import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import "./newUser.css";
-const InitValue = {
-  username: "",
-  email: "",
-  password: "",
-  phone: "",
-  country: "",
-  city: "",
-};
 const NewUser = () => {
   const [file, setFile] = useState("");
-  const [info, setInfo] = useState({ InitValue });
+  const [errors, setErrors] = useState({});
+  const [info, setInfo] = useState({
+    username: "",
+    email: "",
+    password: "",
+    phone: "",
+    country: "",
+    city: "",
+    errors: {},
+  });
   console.log(info);
   const handleChange = (e) => {
     setInfo((prev) => ({
@@ -22,7 +23,8 @@ const NewUser = () => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    console.log("Hello");
+    const { errors, isValid } = validation();
+    setErrors(errors);
   };
   const validation = () => {
     const errors = {};
@@ -74,6 +76,7 @@ const NewUser = () => {
                   <FontAwesomeIcon icon={faFolderPlus} />
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
+                {errors.file && <span className="error">{errors.file}</span>}
               </div>
               <div className="formInput">
                 <label htmlFor="username">UserName:</label>
@@ -82,7 +85,11 @@ const NewUser = () => {
                   placeholder="mr.xyz"
                   id="username"
                   onChange={handleChange}
+                  value={info.username}
                 />
+                {errors.username && (
+                  <span className="error">{errors.username}</span>
+                )}
               </div>
               <div className="formInput">
                 <label htmlFor="email">Email:</label>
@@ -91,11 +98,22 @@ const NewUser = () => {
                   placeholder="Enter Your Email!"
                   id="email"
                   onChange={handleChange}
+                  value={info.email}
                 />
+                {errors.email && <span className="error">{errors.email}</span>}
               </div>
               <div className="formInput">
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" onChange={handleChange} />
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="*****"
+                  onChange={handleChange}
+                  value={info.password}
+                />
+                {errors.password && (
+                  <span className="error">{errors.password}</span>
+                )}
               </div>
               <div className="formInput">
                 <label htmlFor="phone">Phone:</label>
@@ -104,7 +122,11 @@ const NewUser = () => {
                   placeholder="+880123456789"
                   id="phone"
                   onChange={handleChange}
+                  value={info.phone}
                 />
+                {errors.phone && (
+                  <span className="error">{errors.phone}</span>
+                )}
               </div>
               <div className="formInput">
                 <label htmlFor="country">Country:</label>
@@ -113,7 +135,11 @@ const NewUser = () => {
                   placeholder="USA"
                   id="country"
                   onChange={handleChange}
+                  value={info.country}
                 />
+                {errors.country && (
+                  <span className="error">{errors.country}</span>
+                )}
               </div>
               <div className="formInput">
                 <label htmlFor="city">City:</label>
@@ -124,6 +150,8 @@ const NewUser = () => {
                   onChange={handleChange}
                   value={info.city}
                 />
+                <br />
+                {errors.city && <span className="error">{errors.city}</span>}
               </div>
               <button onClick={handleClick} className="rButton">
                 Submit
