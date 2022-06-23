@@ -1,10 +1,11 @@
 import { format } from "date-fns";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { DateRange } from "react-date-range";
 import { useLocation } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
+import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import "./list.css";
 const List = () => {
@@ -24,6 +25,7 @@ const List = () => {
   const { data, loading, reFetch } = useFetch(
     `/hotels?city=${destination}&min=${min || 0}&max=${max || 30000}`
   );
+  const { dispatch } = useContext(SearchContext);
   const onChange = (e) => {
     setOptions((prev) => {
       return {
@@ -33,8 +35,10 @@ const List = () => {
     });
   };
   const handleClick = () => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     reFetch();
   };
+  console.log(dates);
   return (
     <div>
       <Navbar />

@@ -51,6 +51,7 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const { dates, options } = useContext(SearchContext);
+  console.log(dates)
   const { user } = useContext(AuthContext);
 
   const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
