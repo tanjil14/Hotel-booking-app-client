@@ -12,7 +12,7 @@ import React, { useContext, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { SearchContext } from "../../context/SearchContext";
 import "./header.css";
@@ -86,7 +86,7 @@ const Header = ({ type }) => {
               Get rewarded for your travels travels - unlock instant saving of
               10% or more with a free Buribooking account.
             </p>
-            {!user && <button className="headerBtn">Sign-in / Register</button>}
+            {!user && <Link to="/register"><button className="headerBtn">Sign-in / Register</button></Link>}
 
             <div className="headerSearch">
               <div className="headerSearchItem">
