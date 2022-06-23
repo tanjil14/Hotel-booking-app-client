@@ -44,7 +44,7 @@ const Hotel = () => {
   const id = location.pathname.split("/")[2];
 
   const { data, loading } = useFetch(
-    `http://localhost:8800/api/hotels/find/${id}`
+    `/hotels/find/${id}`
   );
   const [sliderNumber, setSliderNumber] = useState(0);
   const [open, setOpen] = useState(false);

@@ -11,9 +11,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { dates } = useContext(SearchContext);
 
-  const { data, loading, error } = useFetch(
-    `http://localhost:8800/api/hotels/room/${hotelId}`
-  );
+  const { data } = useFetch(`/hotels/room/${hotelId}`);
   const handleSelect = (e) => {
     const checked = e.target.checked;
     const value = e.target.value;
@@ -45,17 +43,16 @@ const Reserve = ({ setOpen, hotelId }) => {
     );
 
     return !isFound;
-    //true means not available and false meansavailable
+    //true means not available and false means available
   };
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(
-            `http://localhost:8800/api/rooms/availability/${roomId}`,
-            { dates: alldates }
-          );
+          const res = axios.put(`/rooms/availability/${roomId}`, {
+            dates: alldates,
+          });
           return res.data;
         })
       );

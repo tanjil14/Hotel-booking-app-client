@@ -3,7 +3,7 @@ import "./featured.css";
 
 const Featured = () => {
   const { data, loading } = useFetch(
-    "http://localhost:8800/api/hotels/countByCity?cities=madrid,london,berlin"
+    "/hotels/countByCity?cities=madrid,london,berlin"
   );
   return (
     <div className="featured">
