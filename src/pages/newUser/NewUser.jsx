@@ -5,6 +5,7 @@ import { useState } from "react";
 import { validation } from "../../utils/formValidator";
 import "./newUser.css";
 const NewUser = () => {
+  const [loading, setLoading] = useState(false);
   const [file, setFile] = useState("");
   const [errors, setErrors] = useState({});
   const [info, setInfo] = useState({
@@ -24,11 +25,12 @@ const NewUser = () => {
   };
   const handleClick = async (e) => {
     e.preventDefault();
-    const { errors, isValid } = validation(info,file);
+    const { errors, isValid } = validation(info, file);
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "booking-app");
     try {
+      setLoading(true);
       if (isValid) {
         const uploadRes = await axios.post(
           "https://api.cloudinary.com/v1_1/dqo2uejpy/image/upload",
@@ -40,11 +42,49 @@ const NewUser = () => {
           img: url,
         };
         await axios.post("/auth/register", newUser);
+        setInfo({
+          username: "",
+          email: "",
+          password: "",
+          phone: "",
+          country: "",
+          city: "",
+        });
+        setFile("");
+        setErrors({
+          username: "",
+          email: "",
+          password: "",
+          phone: "",
+          country: "",
+          city: "",
+          file: "",
+        });
+        setLoading(false);
+        alert("User has been create!");
       } else {
         setErrors(errors);
+        setLoading(false);
       }
     } catch (err) {
-      console.log(err);
+      if (err.response.data.message) {
+        const resError = err.response.data.message;
+        const checkMessage = resError.includes("username_1 dup key");
+        const checkEmail = resError.includes("email_1 dup key");
+        if (checkMessage) {
+          setErrors((prev) => ({
+            ...prev,
+            username: "User Name Already Exist! PLease try another.",
+          }));
+        }
+        if (checkEmail) {
+          setErrors((prev) => ({
+            ...prev,
+            email: "Email Already Exist! PLease try another.",
+          }));
+        }
+      }
+      console.log(err.message);
     }
   };
 
@@ -153,16 +193,16 @@ const NewUser = () => {
                 <br />
                 {errors.city && <span className="error">{errors.city}</span>}
               </div>
-              <button onClick={handleClick} className="rButton">
+              <button
+                disabled={loading}
+                onClick={handleClick}
+                className="rButton"
+              >
                 Submit
               </button>
             </form>
           </div>
         </div>
-        {/* <button disabled={loading} onClick={handleClick} className="lButton">
-            Login
-          </button> */}
-        {/* {error && <span>{error.message}</span>} */}
       </div>
     </div>
   );
