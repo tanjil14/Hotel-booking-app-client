@@ -12,6 +12,7 @@ const Login = () => {
 
   const { loading, error, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -23,7 +24,7 @@ const Login = () => {
 
     try {
       const res = await axios.post("/auth/login", credentials);
-     
+
       if (res.data.details.username) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/");

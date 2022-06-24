@@ -2,9 +2,11 @@ import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { validation } from "../../utils/formValidator";
 import "./newUser.css";
 const NewUser = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState("");
   const [errors, setErrors] = useState({});
@@ -16,7 +18,6 @@ const NewUser = () => {
     country: "",
     city: "",
   });
-  console.log(info);
   const handleChange = (e) => {
     setInfo((prev) => ({
       ...prev,
@@ -62,6 +63,7 @@ const NewUser = () => {
         });
         setLoading(false);
         alert("User has been create!");
+        navigate("/login");
       } else {
         setErrors(errors);
         setLoading(false);

@@ -17,7 +17,7 @@
   display: flex;
   gap: 20px;
 }
-h1 {
+.top h1 {
   color: gray;
   font-size: 20px;
 }
