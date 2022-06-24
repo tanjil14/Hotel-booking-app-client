@@ -40,6 +40,9 @@ form {
   gap: 20px;
   justify-content: space-between;
 }
+form .icon{
+  cursor: pointer;
+}
 form .formInput {
   padding: 10px 10px;
   margin: 5px;
