@@ -10,6 +10,7 @@ const images = [
 ];
 const PropertyList = () => {
   const { data, loading } = useFetch("/hotels/countByType");
+  console.log(data)
   return (
     <div className="pList">
       {loading ? (

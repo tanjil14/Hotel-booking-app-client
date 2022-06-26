@@ -43,15 +43,13 @@ const Hotel = () => {
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
 
-  const { data, loading } = useFetch(
-    `/hotels/find/${id}`
-  );
+  const { data, loading } = useFetch(`/hotels/find/${id}`);
+  const max = data?.photos?.length;
   const [sliderNumber, setSliderNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const { dates, options } = useContext(SearchContext);
-  console.log(dates)
   const { user } = useContext(AuthContext);
 
   const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
@@ -63,9 +61,9 @@ const Hotel = () => {
   const handleMove = (direction) => {
     let newSlideNumber;
     if (direction === "l") {
-      newSlideNumber = sliderNumber === 0 ? 5 : sliderNumber - 1;
+      newSlideNumber = sliderNumber === 0 ? max - 1 : sliderNumber - 1;
     } else {
-      newSlideNumber = sliderNumber === 5 ? 0 : sliderNumber + 1;
+      newSlideNumber = sliderNumber === max - 1 ? 0 : sliderNumber + 1;
     }
     setSliderNumber(newSlideNumber);
   };
@@ -159,9 +157,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {openModal && (
-        <Reserve setOpen={setOpenModal} hotelId={id} />
-      )}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };

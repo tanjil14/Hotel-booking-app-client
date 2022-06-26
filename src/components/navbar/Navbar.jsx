@@ -9,14 +9,12 @@ const Navbar = () => {
   const handleClick = async () => {
     try {
       await axios.get("/auth/logout");
-      navigate("/");
+
       dispatch({
         type: "LOGOUT",
       });
+      navigate("/");
     } catch (err) {}
-    dispatch({
-      type: "LOGOUT",
-    });
   };
   return (
     <div className="navbar">
@@ -34,10 +32,10 @@ const Navbar = () => {
         ) : (
           <div className="navItems">
             <Link to="/register">
-            <button className="navButton">Register</button>
+              <button className="navButton">Register</button>
             </Link>
             <Link to="/login">
-            <button className="navButton">Login</button>
+              <button className="navButton">Login</button>
             </Link>
           </div>
         )}

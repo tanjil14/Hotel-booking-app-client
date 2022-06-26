@@ -18,7 +18,6 @@ const List = () => {
     children: location.state.options.children || 0,
     room: location.state.options.room || 1,
   });
-  console.log(options);
   const [openDate, setOpenDate] = useState(false);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
@@ -38,7 +37,6 @@ const List = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     reFetch();
   };
-  console.log(dates);
   return (
     <div>
       <Navbar />

@@ -91,8 +91,8 @@ const NewUser = () => {
   };
 
   return (
-    <div className="register">
-      <div className="rContainer">
+    <div className="new">
+      <div className="nContainer">
         <div className="top">
           <h1>Register on Booking App</h1>
         </div>

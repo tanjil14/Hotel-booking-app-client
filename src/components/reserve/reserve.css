@@ -18,9 +18,9 @@
   position: absolute;
   top: 0;
   right: 0;
- cursor: pointer;
+  cursor: pointer;
 }
-.rItem{
+.rItem {
   display: flex;
   align-items: center;
   gap: 50px;

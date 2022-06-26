@@ -52,13 +52,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .hotelImgWrapper {
   width: 33%;
 }
 
+
 .hotelImg {
+  height: 70%;
   width: 100%;
   object-fit: cover;
   cursor: pointer;
